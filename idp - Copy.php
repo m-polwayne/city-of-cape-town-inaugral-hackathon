@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV File Viewer</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <style>
+        body {
+            background-color: #ffffff;
+            color: #231F20;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #0FB5CE;
+            padding: 10px;
+            text-align: center;
+        }
+        .footer {
+            background-color: #0FB5CE;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .background-image {
+            background-image: url('image.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 25vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            color: #ffffff;
+        }
+        .background-image h1 {
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0);
+            padding: 10px;
+            border-radius: 5px;
+            
+        }
+        .content {
+            margin-top: 20px;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .form-container {
+            display: flex;
+            align-items: center;
+        }
+        h1 {
+            color: #C7E20B;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #040000;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #0FB5CE;
+        }
+        #fileDropdown {
+            background-color: #F7BC07;
+            color: #231F20;
+            padding: 8px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        button {
+            background-color: #F7BC07;
+            color: #231F20;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #C60076;
+        }
+    </style>
+</head>
+<body>
+   
+    <div class="background-image">
+        <h1>Cape Town's Integrated Development Plan (IDP) 2024 - 2026</h1>
+    </div>
+    <div class="content" id="content">
+        <h1>Select your Ward Location</h1>
+        <div class="form-container">
+            <select id="fileDropdown">
+                <option value="" disabled selected>Select a file</option>
+                <option value="10">10</option>
+                <option value="CityWide">CityWide</option>
+                <option value="AreaSouth">AreaSouth</option>
+                <option value="AreaCentral">AreaCentral</option>
+            </select>
+            <button onclick="fetchCSVData()">Load Data</button>
+        </div>
+        <div id="csvData"></div>
+    </div>
+    <div class="footer">
+        &copy; 2024 City of Cape Town
+    </div>
+    <script>
+        // Function to display data from the selected CSV file
+        function fetchCSVData() {
+            const dropdown = document.getElementById('fileDropdown');
+            const selectedFile = dropdown.value;
+            if (selectedFile !== "") {
+                const csvFile = selectedFile + ".csv"; // Adjust file name according to selection
+                fetch(csvFile)
+                    .then(response => response.text())
+                    .then(data => {
+                        const rows = Papa.parse(data, { header: true }).data;
+                        const dataDiv = document.getElementById('csvData');
+                        dataDiv.innerHTML = '';
+
+                        const table = document.createElement('table');
+
+                        // Create table header
+                        const headerRow = document.createElement('tr');
+                        Object.keys(rows[0]).forEach(key => {
+                            const th = document.createElement('th');
+                            th.textContent = key;
+                            headerRow.appendChild(th);
+                        });
+                        table.appendChild(headerRow);
+
+                        // Create table rows
+                        rows.forEach(rowData => {
+                            const row = document.createElement('tr');
+                            Object.values(rowData).forEach(value => {
+                                const td = document.createElement('td');
+                                td.textContent = value;
+                                row.appendChild(td);
+                            });
+                            table.appendChild(row);
+                        });
+
+                        dataDiv.appendChild(table);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching CSV file:', error);
+                    });
+
+                // Link to PHP file
+                const link = document.createElement('a');
+                link.href = selectedFile + ".php";
+                link.textContent = selectedFile;
+                document.getElementById('csvData').appendChild(link);
+            } else {
+                alert("Please select a valid CSV file.");
+            }
+        }
+    </script>
+</body>
+</html>
