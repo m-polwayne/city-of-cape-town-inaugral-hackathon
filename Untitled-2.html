@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,12 +15,9 @@
             background-color: #333;
             color: #fff;
             padding: 10px;
-            text-align: right;
+            text-align: center;
         }
         .container {
-            background-image: url('image.jpg');
-            position: absolute;
-            background-color: rgba(0, 0, 0, 0);
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;
@@ -37,68 +32,62 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        .section-black{
-            background-color: #0FB5CE;
-            color: #fff;
-        }
-
-    
+        /* Theme styles */
         /* Green theme */
         .green {
-            background-color: #C7E20B;
+            background-color: #4CAF50;
             color: #fff;
         }
         /* Blue theme */
         .blue {
-            background-color: #C7E20B;
+            background-color: #2196F3;
             color: #fff;
         }
         /* Orange theme */
         .orange {
-            background-color: #0FB5CE;
+            background-color: #FF9800;
             color: #fff;
         }
         /* Dark pink theme */
         .dark-pink {
-            background-color: #C60076;
+            background-color: #E91E63;
             color: #fff;
         }
     </style>
 </head>
 <body>
 
-<nav>     
-<h1 style="text-align: left;">e-Digital Participation Platform</h1>
-<img src="coclogo.png" alt="Logo" align = left style="height: 40px;">
-   
-    <a href="dashboard.php"><button>Home</button></a>
-    <a href="login.php"><button>Login</button></a>
-    <a href="register.php"><button>Register</button></a>
-    
+<nav>
+    <a href="#" class="green">Home</a>
+    <a href="#" class="blue">IDP</a>
+    <a href="#" class="orange">Chatroom</a>
+    <a href="#" class="dark-pink">Polls</a>
 </nav>
+
 <div class="container">
- 
+    <div class="section green">
+        <h2>Home</h2>
+        <p>Welcome to the Dashboard Home</p>
+    </div>
     <div class="section blue">
         <h2>IDP</h2>
-        <a href = "idp.php">Integrated Development Plan</a>
-    </div>
-    <div class="section dark-pink">
-        <h2>Current Events</h2>
-        <a href="currentevents.php">What's happening in my city</a>
+        <p>Integrated Development Platform</p>
     </div>
     <div class="section orange">
         <h2>Chatroom</h2>
-        <a href="comment.php"> Real-time chat with members</a>
+        <p>Real-time chat with peers</p>
     </div>
     <div class="section dark-pink">
         <h2>Polls</h2>
-        <a href="polls.php">Participate in polls and surveys</a>
+        <p>Participate in polls and surveys</p>
     </div>
- 
     <div class="section" style="flex-basis: 100%;">
         <h2>Trending Events</h2>
-    
-        <a class="twitter-timeline" href="https://twitter.com/CityofCT?ref_src=twsrc%5Etfw">Tweets by CityofCT</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        <p>Here goes the trending events section</p>
+    </div>
+    <div class="section" style="flex-basis: 100%;">
+        <h2>Social Media Updates</h2>
+        <p>Here goes the social media updates section</p>
     </div>
 </div>
 
